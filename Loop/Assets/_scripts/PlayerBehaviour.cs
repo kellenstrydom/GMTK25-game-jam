@@ -100,8 +100,36 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    public void WarpTo(Vector2 newPos)
+
+    {
+        float camDelta = cameraTransform.position.y - transform.position.y;
+
+        transform.position = newPos;
+        cameraTransform.position = transform.position +  new Vector3(0, camDelta, -10);
+    }
+
     void Interact(InputAction.CallbackContext ctx)
     {
         Debug.Log("Interact");
     }
+    
+    // Returns the last known movement direction
+    public Direction GetCurrentDirection()
+    {
+        return direction;
+    }
+
+// Used by the pusher to slow down player when pushing
+    public void SetMoveSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
+    }
+
+// Resets to normal move speed
+    public void ResetMoveSpeed(float defaultSpeed)
+    {
+        moveSpeed = defaultSpeed;
+    }
+
 }
