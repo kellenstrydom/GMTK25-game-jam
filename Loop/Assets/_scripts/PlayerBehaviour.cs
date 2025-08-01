@@ -103,10 +103,10 @@ public class PlayerBehaviour : MonoBehaviour
     public void WarpTo(Vector2 newPos)
 
     {
-        float camDelta = cameraTransform.position.y - transform.position.y;
+        Vector3 camDelta = cameraTransform.position - transform.position;
 
         transform.position = newPos;
-        cameraTransform.position = transform.position +  new Vector3(0, camDelta, -10);
+        cameraTransform.position = transform.position +  camDelta;
     }
 
     void Interact(InputAction.CallbackContext ctx)

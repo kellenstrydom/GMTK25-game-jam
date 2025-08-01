@@ -20,11 +20,11 @@ public class LoopWarp : MonoBehaviour
 
     void CheckPosition()
     {
-        float delta = player.position.y - loopEnd.position.y;
+        Vector2 delta = player.position - loopEnd.position;
         //Debug.Log(delta);
-        if (delta > 0)
+        if (delta.y > 0)
         {
-            player.GetComponent<PlayerBehaviour>().WarpTo(loopStart.position + Vector3.up * delta);
+            player.GetComponent<PlayerBehaviour>().WarpTo(loopStart.position + (Vector3)delta);
         }
     }
 }
