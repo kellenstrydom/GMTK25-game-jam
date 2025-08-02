@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class BoxPusher : MonoBehaviour
@@ -57,10 +58,15 @@ public class BoxPusher : MonoBehaviour
         box.Translate(orthDir * (player.moveSpeed * Time.deltaTime));
     }
 
+    [CanBeNull]
     public Transform CheckBoxWarp(ref Vector3 boxDelta)
     {
         Debug.Log($"checking warp: {box}");
-        if (box == null) boxDelta = Vector3.zero;
+        if (box == null)
+        {
+            boxDelta = Vector3.zero;
+            return box;
+        }
         
         boxDelta = box.position - transform.position;
         return box;

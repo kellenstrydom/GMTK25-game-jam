@@ -28,6 +28,7 @@ public class LoopCar : MonoBehaviour
             {
                 isCrashed = true;
                 Debug.Log("Crashed into a box!");
+                hit.collider.gameObject.layer = LayerMask.NameToLayer("Default");
                 BreakLoop();
                 return;
             }

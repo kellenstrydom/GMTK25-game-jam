@@ -102,5 +102,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Arrowlength: 1
   targetTag: Target
-  flightDirection: {x: 1, y: 0}
+  flightDirection: {x: -1, y: 0}
   flightDistance: 50

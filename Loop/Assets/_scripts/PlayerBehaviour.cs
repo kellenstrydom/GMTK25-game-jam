@@ -28,6 +28,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _boxPusher = GetComponent<BoxPusher>();
         _interact = GetComponent<Interact>();
+        cameraTransform = Camera.main.transform;
     }
 
     void OnEnable()
@@ -116,11 +117,15 @@ public class PlayerBehaviour : MonoBehaviour
     public void WarpTo(Vector2 newPos)
 
     {
-        
+        Debug.Log("Warping to: " + newPos);
+
+        Debug.Log(cameraTransform.name);
         Vector3 camDelta = cameraTransform.position - transform.position;
         
         Vector3 boxDelta = Vector3.zero;
+        
         Transform box = _boxPusher.CheckBoxWarp(ref boxDelta);
+        
 
         transform.position = newPos;
 

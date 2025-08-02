@@ -6,8 +6,8 @@ public class Arrow : MonoBehaviour
     Archer archer;
     public float Arrowlength = 1f;
     public string targetTag;
-    public Vector2 flightDirection = Vector2.right;
-    public float flightDistance = 15f;
+    public Vector2 flightDirection = Vector2.left;
+    public float flightDistance = 60f;
     private bool isFlying;
     Vector2 startPos;
     public void InisialiseArrow(float speed, Archer archer)
