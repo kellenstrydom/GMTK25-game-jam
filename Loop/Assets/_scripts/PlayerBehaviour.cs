@@ -116,10 +116,24 @@ public class PlayerBehaviour : MonoBehaviour
     public void WarpTo(Vector2 newPos)
 
     {
+        
         Vector3 camDelta = cameraTransform.position - transform.position;
+        
+        Vector3 boxDelta = Vector3.zero;
+        Transform box = _boxPusher.CheckBoxWarp(ref boxDelta);
 
         transform.position = newPos;
+
         cameraTransform.position = transform.position +  camDelta;
+
+
+        if (box != null)
+        {
+            box.position = boxDelta + transform.position;
+        }
+        
+        // do for things leading
+        
     }
 
     void Interact(InputAction.CallbackContext ctx)

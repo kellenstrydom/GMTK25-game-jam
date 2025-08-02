@@ -7,16 +7,19 @@ public class Hold : MonoBehaviour
     public Sprite sprite;
     public GameObject itemIndicator;
 
-    public void PickUp(string objectName)
+    
+    public void PickUp(string objectName, Sprite objSprite)
     {
         this.objectName = objectName;
-        itemIndicator.SetActive(true);
-        itemIndicator.GetComponent<TMP_Text>().text = objectName;
-    }
-    public void PickUp(Sprite objSprite)
-    {
         this.sprite = objSprite;
         itemIndicator.SetActive(true);
         itemIndicator.GetComponent<SpriteRenderer>().sprite = objSprite;
+    }
+
+    public void Drop()
+    {
+        this.objectName = null;
+        this.sprite = null;
+        itemIndicator.SetActive(false);
     }
 }

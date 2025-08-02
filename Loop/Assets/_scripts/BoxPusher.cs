@@ -10,6 +10,8 @@ public class BoxPusher : MonoBehaviour
     private PlayerBehaviour player;
     private float defaultSpeed;
 
+    public Transform box;
+
     private void Awake()
     {
         player = GetComponent<PlayerBehaviour>();
@@ -19,6 +21,7 @@ public class BoxPusher : MonoBehaviour
     {
         //Debug.Log(moveDir);
         RaycastHit2D hit = default;
+        box = null;
         if (moveDir == Vector2.zero) return;
         
         // Convert input to orthogonal direction
@@ -49,7 +52,18 @@ public class BoxPusher : MonoBehaviour
     void MoveBox(Transform box, Vector2 orthDir)
     {
         Debug.Log(box);
+        this.box = box;
         //transform.Translate(moveDir * pushSpeed * Time.deltaTime);
-        box.Translate(orthDir * player.moveSpeed * Time.deltaTime);
+        box.Translate(orthDir * (player.moveSpeed * Time.deltaTime));
+    }
+
+    public Transform CheckBoxWarp(ref Vector3 boxDelta)
+    {
+        Debug.Log($"checking warp: {box}");
+        if (box == null) boxDelta = Vector3.zero;
+        
+        boxDelta = box.position - transform.position;
+        return box;
+        
     }
 }
