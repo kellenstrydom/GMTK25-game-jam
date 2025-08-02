@@ -19,6 +19,17 @@ public class PlayerBehaviour : MonoBehaviour
 
     public float xBoundaries;
     public Direction direction;
+    
+    [Header("connections")]
+    public BoxPusher _boxPusher;
+    public Interact _interact;
+
+    private void Awake()
+    {
+        _boxPusher = GetComponent<BoxPusher>();
+        _interact = GetComponent<Interact>();
+    }
+
     void OnEnable()
     {
         InputManager.InputActions.Player.Interact.performed += Interact;
@@ -44,6 +55,8 @@ public class PlayerBehaviour : MonoBehaviour
                 movement = Vector3.Normalize(new Vector2(0, movement.y));
             }
         }
+        
+        _boxPusher.CheckBox(movement);
 
         ChangeDirection(GetDirection(movement));
         
@@ -112,6 +125,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Interact(InputAction.CallbackContext ctx)
     {
         Debug.Log("Interact");
+        _interact.InteractWithObject();
     }
     
     // Returns the last known movement direction

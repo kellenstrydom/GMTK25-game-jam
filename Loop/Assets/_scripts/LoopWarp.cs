@@ -22,7 +22,7 @@ public class LoopWarp : MonoBehaviour
     {
         Vector2 delta = player.position - loopEnd.position;
         //Debug.Log(delta);
-        if (delta.y > 0)
+        if (delta.y < 0)
         {
             player.GetComponent<PlayerBehaviour>().WarpTo(loopStart.position + (Vector3)delta);
         }

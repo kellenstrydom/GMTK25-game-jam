@@ -1,36 +1,55 @@
+using System;
 using UnityEngine;
 
 public class BoxPusher : MonoBehaviour
 {
     public float pushSpeed = 1.5f;
     public float detectionDistance = 0.6f;
-    public LayerMask boxLayer;
+    public LayerMask pushLayer;
 
     private PlayerBehaviour player;
     private float defaultSpeed;
 
+    private void Awake()
+    {
+        player = GetComponent<PlayerBehaviour>();
+    }
+
     public void CheckBox(Vector2 moveDir)
     {
-        
+        //Debug.Log(moveDir);
         RaycastHit2D hit = default;
-
+        if (moveDir == Vector2.zero) return;
+        
         // Convert input to orthogonal direction
-        Vector2 dir = Vector2.zero;
-
-        if (Mathf.Abs(moveDir.y) > Mathf.Abs(moveDir.x))
+        Vector2 horizontal = new Vector2(moveDir.x, 0);
+        Vector2 vertical = new Vector2(0, moveDir.y);
+        
+        hit = Physics2D.Raycast(transform.position, horizontal.normalized, detectionDistance, pushLayer);
+        
+        if (hit.collider != null && horizontal != Vector2.zero)
         {
-            dir = moveDir.y > 0 ? Vector2.up : Vector2.down;
-        }
-        else if (Mathf.Abs(moveDir.x) > 0)
-        {
-            dir = moveDir.x > 0 ? Vector2.right : Vector2.left;
+            Debug.Log("Hit side: " + hit.collider.name );
+            MoveBox(hit.collider.transform, horizontal);
+            return;
         }
         else
         {
-            return ;
+            hit = Physics2D.Raycast(transform.position, vertical, detectionDistance, pushLayer);
+            if (hit.collider != null && vertical != Vector2.zero)
+            {
+                Debug.Log("Hit up: " + hit.collider.name);
+                MoveBox(hit.collider.transform, vertical);
+                return;
+            }
+            
         }
+    }
 
-        hit = Physics2D.Raycast(transform.position, dir, detectionDistance, boxLayer);
-        //return hit.collider != null && hit.collider.CompareTag("Box");
+    void MoveBox(Transform box, Vector2 orthDir)
+    {
+        Debug.Log(box);
+        //transform.Translate(moveDir * pushSpeed * Time.deltaTime);
+        box.Translate(orthDir * player.moveSpeed * Time.deltaTime);
     }
 }

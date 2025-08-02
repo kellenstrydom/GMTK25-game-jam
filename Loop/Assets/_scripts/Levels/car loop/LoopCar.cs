@@ -16,7 +16,7 @@ public class LoopCar : MonoBehaviour
         if (isCrashed) return;
 
         // Raycast forward to detect objects
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, detectionDistance, detectionLayers);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, detectionDistance);
 
         if (hit.collider != null)
         {
@@ -28,6 +28,7 @@ public class LoopCar : MonoBehaviour
             {
                 isCrashed = true;
                 Debug.Log("Crashed into a box!");
+                BreakLoop();
                 return;
             }
         }
@@ -51,10 +52,8 @@ public class LoopCar : MonoBehaviour
         }
     }
 
-    void OnDrawGizmosSelected()
+    void BreakLoop()
     {
-        // Visualize the raycast in Scene view
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.right * detectionDistance);
+        GetComponentInParent<LoopManager>().BreakLoop();
     }
 }
