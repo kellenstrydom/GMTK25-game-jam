@@ -103,4 +103,4 @@ MonoBehaviour:
   Arrowlength: 1
   targetTag: Target
   flightDirection: {x: -1, y: 0}
-  flightDistance: 50
+  flightDistance: 100

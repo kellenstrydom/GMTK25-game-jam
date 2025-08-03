@@ -1,4 +1,5 @@
-using System;
+    using System;
+using System.Collections;
 using UnityEngine;
 
 public class Archer : MonoBehaviour
@@ -9,12 +10,15 @@ public class Archer : MonoBehaviour
     public Transform spawnPoint;
     public float arrowSpeed = 10f;
     public float loopTime;
-
-    public float delay;
+    
+    public float shootDelay = 1f; // adjustable in inspector
+    
+    Animator animator;
 
     private void Awake()
     {
         isLoop = true;
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -25,13 +29,23 @@ public class Archer : MonoBehaviour
         Shoot();
     }
     
-
     void Shoot()
     {
-        GameObject obj = Instantiate(arrow, spawnPoint.position, Quaternion.identity);
-        obj.GetComponent<Arrow>().InisialiseArrow(arrowSpeed,this);
-        isWaiting = true;
+        StartCoroutine(ShootCoroutine());
     }
+
+    private IEnumerator ShootCoroutine()
+    {
+        isWaiting = true;
+        animator.SetBool("isMiss", false);
+        yield return new WaitForSeconds(shootDelay);
+
+        GameObject obj = Instantiate(arrow, spawnPoint.position, Quaternion.identity);
+        obj.GetComponent<Arrow>().InisialiseArrow(arrowSpeed, this);
+        
+        animator.SetBool("isMiss", true);
+    }
+
 
     public void ArrowMiss()
     {
@@ -41,6 +55,8 @@ public class Archer : MonoBehaviour
     public void ArrowHit()
     {
         BreakLoop();
+        animator.SetBool("isHit", true);
+        animator.SetBool("isMiss", false);
     }
 
     void BreakLoop()
