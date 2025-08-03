@@ -489,10 +489,14 @@ MonoBehaviour:
   speed: 10
   resetX: 40
   startX: -40
-  detectionDistance: 4.5
+  boxSize: {x: 1, y: 1}
+  direction: {x: 1, y: 0}
+  castDistance: 1
+  castOffset: {x: 0, y: 0}
   detectionLayers:
     serializedVersion: 2
     m_Bits: 128
+  showGizmos: 1
 --- !u!212 &364175797
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -741,6 +745,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 763970299}
   arrowSpeed: 20
   loopTime: 0
+  shootDelay: 1
 --- !u!212 &763970301
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1267,7 +1272,7 @@ GameObject:
   - component: {fileID: 1398085365}
   - component: {fileID: 1398085366}
   m_Layer: 7
-  m_Name: box (1)
+  m_Name: target
   m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
