@@ -25,15 +25,17 @@ public class PlayerBehaviour : MonoBehaviour
     [Header("connections")]
     public BoxPusher _boxPusher;
     public Interact _interact;
+    
+    public Animator animator;
 
     private void Awake()
     {
         _boxPusher = GetComponent<BoxPusher>();
         _interact = GetComponent<Interact>();
         cameraTransform = Camera.main.transform;
-        
-        // rb = GetComponent<Rigidbody2D>();
-        // rb.bodyType = RigidbodyType2D.Kinematic;
+
+        animator = GetComponent<Animator>();
+
     }
 
     void OnEnable()
@@ -96,11 +98,33 @@ public class PlayerBehaviour : MonoBehaviour
 
     void ChangeDirection(Direction newDir)
     {
-        if (direction != newDir)
+        if (direction == newDir) return;
+        direction = newDir;
+
+        // Reset all parameters first
+        animator.SetBool("isFront", false);
+        animator.SetBool("isBack", false);
+        animator.SetBool("isSide", false);
+
+        // Set the correct one
+        switch (newDir)
         {
-            direction = newDir;
-            //Debug.Log("Change direction");
+            case Direction.up:
+                animator.SetBool("isBack", true);    // walking up → back
+                break;
+            case Direction.down:
+                animator.SetBool("isFront", true);   // walking down → front
+                break;
+            case Direction.left:
+            case Direction.right:
+                animator.SetBool("isSide", true);    // left/right → side
+                break;
         }
+        
+        if (direction == Direction.right)
+            transform.localScale = new Vector3(-1, 1, 1);
+        else 
+            transform.localScale = new Vector3(1, 1, 1);
     }
 
     void AdjustCamera()

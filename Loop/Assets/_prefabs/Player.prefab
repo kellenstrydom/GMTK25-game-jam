@@ -202,7 +202,7 @@ Transform:
   m_GameObject: {fileID: 4187465120007753067}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 8.4, z: 0}
+  m_LocalPosition: {x: 0.28, y: 5.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -273,11 +273,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7970187305196125438}
   - component: {fileID: 1066743916550166807}
+  - component: {fileID: 33771773684030077}
   - component: {fileID: 340591824031676176}
   - component: {fileID: 8956906684638919955}
   - component: {fileID: 6693558299607224500}
   - component: {fileID: 3293873801982640517}
   - component: {fileID: 1180090149385279093}
+  - component: {fileID: 2795171646808913647}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -357,6 +359,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &33771773684030077
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7130445440019694172}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 83c99a3e7770bfb4e96cf35b42af463c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &340591824031676176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,10 +393,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ac5cda902e9f664fabf27a17cb386fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  moveSpeed: 10
   cameraTransform: {fileID: 0}
   camOffset: 3
-  xBoundaries: 7.6
+  xBoundaries: 26.3
   direction: 0
   _boxPusher: {fileID: 0}
   _interact: {fileID: 0}
@@ -389,11 +413,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushSpeed: 2
-  detectionDistance: 1
+  detectionDistance: 0.5
   pushLayer:
     serializedVersion: 2
     m_Bits: 128
   box: {fileID: 0}
+  boxSize: {x: 2.37, y: 7.2}
+  horizontalOffset: {x: 0, y: 0}
+  verticalOffset: {x: 0, y: 0}
 --- !u!114 &6693558299607224500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,6 +483,33 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 2.487176}
-  m_Size: {x: 2.36, y: 7.393568}
+  m_Offset: {x: 0, y: -0.7836778}
+  m_Size: {x: 2.36, y: 6.5404496}
   m_Direction: 0
+--- !u!50 &2795171646808913647
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7130445440019694172}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

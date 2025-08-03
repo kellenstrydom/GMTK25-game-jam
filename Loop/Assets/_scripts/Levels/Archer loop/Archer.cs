@@ -10,6 +10,8 @@ public class Archer : MonoBehaviour
     public float arrowSpeed = 10f;
     public float loopTime;
 
+    public float delay;
+
     private void Awake()
     {
         isLoop = true;
@@ -22,6 +24,7 @@ public class Archer : MonoBehaviour
         // shoot
         Shoot();
     }
+    
 
     void Shoot()
     {
