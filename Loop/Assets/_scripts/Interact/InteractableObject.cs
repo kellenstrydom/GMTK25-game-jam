@@ -47,7 +47,6 @@ public class InteractableObject : MonoBehaviour
         }
         
         indecator.SetActive(isTargeted);
-        
     }
 
     public void InteractWith(Interact interact)

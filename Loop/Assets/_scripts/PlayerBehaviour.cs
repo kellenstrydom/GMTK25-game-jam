@@ -19,7 +19,9 @@ public class PlayerBehaviour : MonoBehaviour
 
     public float xBoundaries;
     public Direction direction;
-    
+
+    Rigidbody2D rb;
+        
     [Header("connections")]
     public BoxPusher _boxPusher;
     public Interact _interact;
@@ -29,6 +31,9 @@ public class PlayerBehaviour : MonoBehaviour
         _boxPusher = GetComponent<BoxPusher>();
         _interact = GetComponent<Interact>();
         cameraTransform = Camera.main.transform;
+        
+        // rb = GetComponent<Rigidbody2D>();
+        // rb.bodyType = RigidbodyType2D.Kinematic;
     }
 
     void OnEnable()
@@ -61,9 +66,11 @@ public class PlayerBehaviour : MonoBehaviour
 
         ChangeDirection(GetDirection(movement));
         
+        // Vector2 newPos = rb.position + movement * (moveSpeed * Time.deltaTime);;
+        // rb.MovePosition(newPos);
         transform.Translate(movement * (moveSpeed * Time.deltaTime));
         if (Mathf.Abs(transform.position.x) > xBoundaries)
-        {
+        {   
             if (transform.position.x > 0)
                 transform.position = new Vector2(xBoundaries, transform.position.y);
             else

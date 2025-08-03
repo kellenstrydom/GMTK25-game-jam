@@ -12,6 +12,11 @@ public class BoxPusher : MonoBehaviour
     private float defaultSpeed;
 
     public Transform box;
+    
+    
+    public Vector2 boxSize = new Vector2(1f, 1f); // Adjust to match your player size
+    public Vector2 horizontalOffset = new Vector2(0.5f, 0f); // Offset cast origin for side pushes
+    public Vector2 verticalOffset = new Vector2(0f, 0.5f);   // Offset cast origin for up/down pushes
 
     private void Awake()
     {
@@ -20,36 +25,39 @@ public class BoxPusher : MonoBehaviour
 
     public void CheckBox(Vector2 moveDir)
     {
-        //Debug.Log(moveDir);
-        RaycastHit2D hit = default;
         box = null;
         if (moveDir == Vector2.zero) return;
-        
-        // Convert input to orthogonal direction
-        Vector2 horizontal = new Vector2(moveDir.x, 0);
-        Vector2 vertical = new Vector2(0, moveDir.y);
-        
-        hit = Physics2D.Raycast(transform.position, horizontal.normalized, detectionDistance, pushLayer);
-        
-        if (hit.collider != null && horizontal != Vector2.zero)
+
+        // Check horizontal
+        if (moveDir.x != 0)
         {
-            Debug.Log("Hit side: " + hit.collider.name );
-            MoveBox(hit.collider.transform, horizontal);
-            return;
-        }
-        else
-        {
-            hit = Physics2D.Raycast(transform.position, vertical, detectionDistance, pushLayer);
-            if (hit.collider != null && vertical != Vector2.zero)
+            Vector2 dir = new Vector2(moveDir.x, 0).normalized;
+            Vector2 origin = (Vector2)transform.position + new Vector2(horizontalOffset.x * Mathf.Sign(dir.x), horizontalOffset.y);
+
+            RaycastHit2D hit = Physics2D.BoxCast(origin, boxSize, 0f, dir, detectionDistance, pushLayer);
+            if (hit.collider != null)
             {
-                Debug.Log("Hit up: " + hit.collider.name);
-                MoveBox(hit.collider.transform, vertical);
+                Debug.Log("Hit side: " + hit.collider.name);
+                MoveBox(hit.collider.transform, dir);
                 return;
             }
-            
+        }
+
+        // Check vertical
+        if (moveDir.y != 0)
+        {
+            Vector2 dir = new Vector2(0, moveDir.y).normalized;
+            Vector2 origin = (Vector2)transform.position + new Vector2(verticalOffset.x, verticalOffset.y * Mathf.Sign(dir.y));
+
+            RaycastHit2D hit = Physics2D.BoxCast(origin, boxSize, 0f, dir, detectionDistance, pushLayer);
+            if (hit.collider != null)
+            {
+                Debug.Log("Hit vertical: " + hit.collider.name);
+                MoveBox(hit.collider.transform, dir);
+                return;
+            }
         }
     }
-
     void MoveBox(Transform box, Vector2 orthDir)
     {
         Debug.Log(box);
@@ -72,4 +80,66 @@ public class BoxPusher : MonoBehaviour
         return box;
         
     }
+    
+    
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        if (!Application.isPlaying) return;
+
+        Gizmos.color = Color.cyan;
+
+        // Draw horizontal BoxCasts (left & right)
+        foreach (int dirX in new int[] { -1, 1 })
+        {
+            Vector2 direction = new Vector2(dirX, 0);
+            Vector2 origin = (Vector2)transform.position + new Vector2(horizontalOffset.x * dirX, horizontalOffset.y);
+            Vector2 endPoint = origin + direction * detectionDistance;
+
+            DrawBoxCastGizmo(origin, direction, boxSize, detectionDistance);
+        }
+
+        // Draw vertical BoxCasts (up & down)
+        foreach (int dirY in new int[] { -1, 1 })
+        {
+            Vector2 direction = new Vector2(0, dirY);
+            Vector2 origin = (Vector2)transform.position + new Vector2(verticalOffset.x, verticalOffset.y * dirY);
+            Vector2 endPoint = origin + direction * detectionDistance;
+
+            DrawBoxCastGizmo(origin, direction, boxSize, detectionDistance);
+        }
+    }
+#endif
+    
+    private void DrawBoxCastGizmo(Vector2 origin, Vector2 direction, Vector2 size, float distance)
+    {
+        Quaternion rotation = Quaternion.identity;
+        Vector2 halfExtents = size * 0.5f;
+
+        // Calculate the center of the box after the cast
+        Vector2 castCenter = origin + direction.normalized * distance;
+
+        // Draw the original box
+        Gizmos.DrawWireCube(origin, size);
+
+        // Draw the casted box
+        Gizmos.DrawWireCube(castCenter, size);
+
+        // Draw connecting lines between the corners
+        Vector2[] corners = new Vector2[4]
+        {
+            origin + new Vector2(-halfExtents.x, -halfExtents.y),
+            origin + new Vector2(-halfExtents.x,  halfExtents.y),
+            origin + new Vector2( halfExtents.x,  halfExtents.y),
+            origin + new Vector2( halfExtents.x, -halfExtents.y)
+        };
+
+        Vector2 offset = direction.normalized * distance;
+        for (int i = 0; i < 4; i++)
+        {
+            Gizmos.DrawLine(corners[i], corners[i] + offset);
+        }
+    }
+
+
 }

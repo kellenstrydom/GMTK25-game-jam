@@ -37,6 +37,7 @@ public class Arrow : MonoBehaviour
         
         if (hit.collider != null && hit.collider.CompareTag(targetTag))
         {
+            hit.collider.gameObject.layer = LayerMask.NameToLayer("Default");
             archer.ArrowHit();
             isFlying = false;
         }
