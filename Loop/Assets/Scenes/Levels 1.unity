@@ -2522,10 +2522,10 @@ MonoBehaviour:
   speed: 10
   resetX: 40
   startX: -40
-  boxSize: {x: 0.5, y: 0.5}
+  boxSize: {x: 0.52, y: 2.74}
   direction: {x: 1, y: 0}
   castDistance: 1
-  castOffset: {x: 0, y: 0}
+  castOffset: {x: 3.77, y: -1.5}
   detectionLayers:
     serializedVersion: 2
     m_Bits: 128
@@ -3713,11 +3713,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7970187305196125438, guid: 66555d30b038e0440864a19523f0f07b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.5305874
+      value: -0.56941247
       objectReference: {fileID: 0}
     - target: {fileID: 7970187305196125438, guid: 66555d30b038e0440864a19523f0f07b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.4
+      value: 72.299995
       objectReference: {fileID: 0}
     - target: {fileID: 7970187305196125438, guid: 66555d30b038e0440864a19523f0f07b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5532,7 +5532,7 @@ Transform:
   m_GameObject: {fileID: 852813493}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -3.1, y: 77, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11773,7 +11773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1178504493148409208, guid: c9b836ef820bd104bbd1f87c7c8035b6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -158.4
+      value: -218.4
       objectReference: {fileID: 0}
     - target: {fileID: 1178504493148409208, guid: c9b836ef820bd104bbd1f87c7c8035b6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15652,6 +15652,10 @@ PrefabInstance:
       value: 10.302078
       objectReference: {fileID: 0}
     - target: {fileID: 5333377252191635887, guid: c9b836ef820bd104bbd1f87c7c8035b6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5333377252191635887, guid: c9b836ef820bd104bbd1f87c7c8035b6, type: 3}
       propertyPath: m_Offset.x
       value: -0.24266529
       objectReference: {fileID: 0}
@@ -15711,11 +15715,11 @@ SceneRoots:
   - {fileID: 816126323}
   - {fileID: 29559841}
   - {fileID: 1609518681}
-  - {fileID: 6676784621563889202}
   - {fileID: 1579447881}
   - {fileID: 1813096510}
   - {fileID: 511962855}
   - {fileID: 932147131}
   - {fileID: 1649825908}
   - {fileID: 865497829}
+  - {fileID: 6676784621563889202}
   - {fileID: 1624314718}

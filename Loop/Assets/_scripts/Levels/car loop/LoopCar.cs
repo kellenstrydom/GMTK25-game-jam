@@ -35,8 +35,7 @@ public class LoopCar : MonoBehaviour
             boxSize,
             0f,
             direction.normalized,
-            castDistance,
-            detectionLayers
+            castDistance
         );
         if (hit.collider != null)
         {
