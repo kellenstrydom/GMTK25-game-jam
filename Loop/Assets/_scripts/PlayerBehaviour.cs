@@ -92,7 +92,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (direction != newDir)
         {
             direction = newDir;
-            Debug.Log("Change direction");
+            //Debug.Log("Change direction");
         }
     }
 
@@ -114,10 +114,10 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    public void WarpTo(Vector2 newPos)
+    public void WarpTo(Vector2 newPos, LoopWarp loopWarp)
 
     {
-        Debug.Log("Warping to: " + newPos);
+        //Debug.Log("Warping to: " + newPos);
 
         Debug.Log(cameraTransform.name);
         Vector3 camDelta = cameraTransform.position - transform.position;
@@ -125,6 +125,15 @@ public class PlayerBehaviour : MonoBehaviour
         Vector3 boxDelta = Vector3.zero;
         
         Transform box = _boxPusher.CheckBoxWarp(ref boxDelta);
+
+        if (box == null)
+        {
+            loopWarp.CheckWarpPush();
+        }
+        else
+        {
+            loopWarp.isPushByWarp = false;
+        }
         
 
         transform.position = newPos;
