@@ -10,6 +10,16 @@ public class Arrow : MonoBehaviour
     public float flightDistance = 60f;
     private bool isFlying;
     Vector2 startPos;
+
+    public AudioSource arrowsfx;
+    public AudioClip arrow;
+
+    void Start()
+    {
+        arrowsfx = GetComponent<AudioSource>();
+        arrowsfx.Play(); 
+    }
+
     public void InisialiseArrow(float speed, Archer archer)
     {
         moveSpeed = speed;

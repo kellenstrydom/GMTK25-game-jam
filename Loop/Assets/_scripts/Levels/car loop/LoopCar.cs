@@ -20,6 +20,9 @@ public class LoopCar : MonoBehaviour
     
     private bool isStopped = false;
     private bool isCrashed = false;
+
+    public AudioClip boxCrash;
+    public AudioClip honk; 
     
 
     void Update()
