@@ -21,21 +21,33 @@ public class PlayerBehaviour : MonoBehaviour
     public Direction direction;
 
     Rigidbody2D rb;
-        
+
     [Header("connections")]
     public BoxPusher _boxPusher;
     public Interact _interact;
-    
+
     public Animator animator;
+
+    [Header("Audio")]
+    public AudioClip walkingClip;  // assign in inspector
+    public AudioSource walkingAS;  // assign in inspector
+    private bool isWalking = false;
 
     private void Awake()
     {
         _boxPusher = GetComponent<BoxPusher>();
         _interact = GetComponent<Interact>();
         cameraTransform = Camera.main.transform;
-
         animator = GetComponent<Animator>();
+    }
 
+    void Start()
+    {
+        if (walkingAS != null && walkingClip != null)
+        {
+            walkingAS.clip = walkingClip;
+            walkingAS.loop = true; // so it repeats while walking
+        }
     }
 
     void OnEnable()
@@ -52,6 +64,23 @@ public class PlayerBehaviour : MonoBehaviour
     void Move()
     {
         Vector2 movement = InputManager.MovementInputValue();
+
+        // --- walking sound control ---
+        bool movingNow = movement != Vector2.zero;
+        if (movingNow && !isWalking)
+        {
+            isWalking = true;
+            if (walkingAS != null && !walkingAS.isPlaying)
+                walkingAS.Play();
+        }
+        else if (!movingNow && isWalking)
+        {
+            isWalking = false;
+            if (walkingAS != null && walkingAS.isPlaying)
+                walkingAS.Stop();
+        }
+        // ----------------------------
+
         if (Mathf.Approximately(Mathf.Abs(transform.position.x), xBoundaries))
         {
             if (transform.position.x > 0 && movement.x > 0)
@@ -63,24 +92,20 @@ public class PlayerBehaviour : MonoBehaviour
                 movement = Vector3.Normalize(new Vector2(0, movement.y));
             }
         }
-        
-        _boxPusher.CheckBox(movement);
 
+        _boxPusher.CheckBox(movement);
         ChangeDirection(GetDirection(movement));
-        
-        // Vector2 newPos = rb.position + movement * (moveSpeed * Time.deltaTime);;
-        // rb.MovePosition(newPos);
         transform.Translate(movement * (moveSpeed * Time.deltaTime));
+
         if (Mathf.Abs(transform.position.x) > xBoundaries)
-        {   
+        {
             if (transform.position.x > 0)
                 transform.position = new Vector2(xBoundaries, transform.position.y);
             else
-            {
                 transform.position = new Vector2(-xBoundaries, transform.position.y);
-            }
         }
     }
+
     Direction GetDirection(Vector2 input)
     {
         if (input == Vector2.zero)
@@ -110,99 +135,75 @@ public class PlayerBehaviour : MonoBehaviour
         switch (newDir)
         {
             case Direction.up:
-                animator.SetBool("isBack", true);    // walking up → back
+                animator.SetBool("isBack", true);
                 break;
             case Direction.down:
-                animator.SetBool("isFront", true);   // walking down → front
+                animator.SetBool("isFront", true);
                 break;
             case Direction.left:
             case Direction.right:
-                animator.SetBool("isSide", true);    // left/right → side
+                animator.SetBool("isSide", true);
                 break;
         }
-        
+
         if (direction == Direction.right)
             transform.localScale = new Vector3(-1, 1, 1);
-        else 
+        else
             transform.localScale = new Vector3(1, 1, 1);
     }
 
     void AdjustCamera()
     {
-        // more box movement
         if (Mathf.Abs(cameraTransform.position.y - transform.position.y) > camOffset)
         {
             if (cameraTransform.position.y > transform.position.y)
             {
                 cameraTransform.position =
                     new Vector3(cameraTransform.position.x, transform.position.y + camOffset, -10);
-            }            
+            }
             else
             {
                 cameraTransform.position = new Vector3(cameraTransform.position.x, transform.position.y - camOffset, cameraTransform.position.z);
             }
-
         }
     }
 
     public void WarpTo(Vector2 newPos, LoopWarp loopWarp)
-
     {
-        //Debug.Log("Warping to: " + newPos);
-
-        Debug.Log(cameraTransform.name);
         Vector3 camDelta = cameraTransform.position - transform.position;
-        
         Vector3 boxDelta = Vector3.zero;
-        
+
         Transform box = _boxPusher.CheckBoxWarp(ref boxDelta);
 
         if (box == null)
-        {
             loopWarp.CheckWarpPush();
-        }
         else
-        {
             loopWarp.isPushByWarp = false;
-        }
-        
 
         transform.position = newPos;
-
-        cameraTransform.position = transform.position +  camDelta;
-
+        cameraTransform.position = transform.position + camDelta;
 
         if (box != null)
-        {
             box.position = boxDelta + transform.position;
-        }
-        
-        // do for things leading
-        
     }
 
     void Interact(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Interact");
         _interact.InteractWithObject();
     }
-    
-    // Returns the last known movement direction
+
     public Direction GetCurrentDirection()
     {
         return direction;
     }
 
-// Used by the pusher to slow down player when pushing
     public void SetMoveSpeed(float newSpeed)
     {
         moveSpeed = newSpeed;
     }
 
-// Resets to normal move speed
     public void ResetMoveSpeed(float defaultSpeed)
     {
         moveSpeed = defaultSpeed;
     }
-
 }
