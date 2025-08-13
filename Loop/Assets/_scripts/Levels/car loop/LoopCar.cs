@@ -22,8 +22,17 @@ public class LoopCar : MonoBehaviour
     private bool isCrashed = false;
 
     public AudioClip boxCrash;
-    public AudioClip honk; 
-    
+    public AudioClip honk;
+    public AudioSource carAS;
+
+    public Sprite crashSprite;
+    private SpriteRenderer spriteRenderer;
+
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        carAS.clip = boxCrash; 
+    }
 
     void Update()
     {
@@ -51,6 +60,8 @@ public class LoopCar : MonoBehaviour
                 isCrashed = true;
                 Debug.Log("Crashed into a box!");
                 hit.collider.gameObject.layer = LayerMask.NameToLayer("Default");
+                spriteRenderer.sprite = crashSprite;
+                carAS.Play(); 
                 BreakLoop();
                 return;
             }
