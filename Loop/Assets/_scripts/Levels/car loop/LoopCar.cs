@@ -24,6 +24,7 @@ public class LoopCar : MonoBehaviour
     public AudioClip boxCrash;
     public AudioClip honk;
     public AudioSource carAS;
+    public AudioSource carAS2;
 
     public Sprite crashSprite;
     private SpriteRenderer spriteRenderer;
@@ -31,7 +32,8 @@ public class LoopCar : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        carAS.clip = boxCrash; 
+        carAS.clip = boxCrash;
+        carAS2.clip = honk; 
     }
 
     void Update()
@@ -53,6 +55,7 @@ public class LoopCar : MonoBehaviour
         {
             if (hit.collider.CompareTag("Player"))
             {
+                carAS2.Play();
                 isStopped = true;
             }
             else if (hit.collider.CompareTag("Pushable"))
