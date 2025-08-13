@@ -15,6 +15,14 @@ public class Archer : MonoBehaviour
     
     Animator animator;
 
+    public AudioSource arrowsAS;
+    public AudioClip arrowHit;
+
+    void Start()
+    {
+        arrowsAS.clip = arrowHit; 
+    }
+
     private void Awake()
     {
         isLoop = true;
@@ -57,6 +65,8 @@ public class Archer : MonoBehaviour
         BreakLoop();
         animator.SetBool("isHit", true);
         animator.SetBool("isMiss", false);
+        arrowsAS.Play(); 
+
     }
 
     void BreakLoop()

@@ -11,15 +11,7 @@ public class Arrow : MonoBehaviour
     private bool isFlying;
     Vector2 startPos;
 
-    public AudioSource arrowsfx;
-    public AudioClip arrow;
-
-    void Start()
-    {
-        arrowsfx = GetComponent<AudioSource>();
-        arrowsfx.Play(); 
-    }
-
+    
     public void InisialiseArrow(float speed, Archer archer)
     {
         moveSpeed = speed;
