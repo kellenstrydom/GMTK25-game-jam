@@ -18,6 +18,14 @@ public class BoxPusher : MonoBehaviour
     public Vector2 horizontalOffset = new Vector2(0.5f, 0f); // Offset cast origin for side pushes
     public Vector2 verticalOffset = new Vector2(0f, 0.5f);   // Offset cast origin for up/down pushes
 
+    public AudioClip push;
+    public AudioSource pushAS;
+
+    void Start()
+    {
+        pushAS.clip = push;
+    }
+
     private void Awake()
     {
         player = GetComponent<PlayerBehaviour>();
@@ -54,6 +62,7 @@ public class BoxPusher : MonoBehaviour
             {
                 Debug.Log("Hit vertical: " + hit.collider.name);
                 MoveBox(hit.collider.transform, dir);
+
                 return;
             }
         }
@@ -64,6 +73,7 @@ public class BoxPusher : MonoBehaviour
         this.box = box;
         //transform.Translate(moveDir * pushSpeed * Time.deltaTime);
         box.Translate(orthDir * (player.moveSpeed * Time.deltaTime));
+        pushAS.Play(); 
     }
 
     [CanBeNull]

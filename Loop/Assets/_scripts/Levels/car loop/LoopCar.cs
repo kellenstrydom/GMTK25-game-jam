@@ -61,10 +61,10 @@ public class LoopCar : MonoBehaviour
             else if (hit.collider.CompareTag("Pushable"))
             {
                 isCrashed = true;
+                carAS.Play();
                 Debug.Log("Crashed into a box!");
                 hit.collider.gameObject.layer = LayerMask.NameToLayer("Default");
                 spriteRenderer.sprite = crashSprite;
-                carAS.Play(); 
                 BreakLoop();
                 return;
             }
