@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f9fd69eb784c04bb7c09c53bf6cc24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelSceneName: Level 1
   disclaimer: {fileID: 1798946470}
 --- !u!4 &115647100
 Transform:

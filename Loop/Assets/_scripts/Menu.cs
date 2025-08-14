@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    public string levelSceneName = "Level 1";
+  
 
     public GameObject disclaimer; 
 
@@ -25,7 +25,12 @@ public class Menu : MonoBehaviour
 
     public void StartGame(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene("Levels 1");
+    }
+
+    public void EndGame(string sceneName)
+    {
+        SceneManager.LoadScene("Home");
     }
 
     public void QuitGame()
