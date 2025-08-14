@@ -33,16 +33,20 @@ public class EndHouse : MonoBehaviour
 
     IEnumerator PanCamera(Vector3 targetPosition)
     {
-        Vector3 startPos = transform.position;
+        Debug.Log($"Pan camera started -> {targetPosition}");
+        Vector3 startPos = Camera.main.transform.position;
         float elapsedTime = 0f;
 
         while (elapsedTime < 1f)
         {
+            Debug.Log($"Pan camera time: {elapsedTime}");
+            elapsedTime += Time.deltaTime;
             Camera.main.transform.position = Vector3.Lerp(startPos, targetPosition, elapsedTime);
             player.position = Vector3.Lerp(startPos, targetPosition, elapsedTime);
-            elapsedTime += Time.deltaTime * panSpeed;
             yield return null;
         }
+        
+        Debug.Log($"Pan camera finished -> {elapsedTime}");
 
         transform.position = targetPosition;
     }
@@ -57,6 +61,7 @@ public class EndHouse : MonoBehaviour
 
     private IEnumerator PanPlayer(Vector3 targetPos)
     {
+        Debug.Log($"Pan player started -> {targetPos}");
         Collider col = GetComponent<Collider>();
         if (col != null)
             col.enabled = false;

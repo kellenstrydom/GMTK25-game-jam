@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class LoopWarp : MonoBehaviour
 {
+    LoopManager _loopManager;
     public Transform loopStart;
     public Transform loopEnd;
 
@@ -15,6 +16,7 @@ public class LoopWarp : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        _loopManager = transform.GetComponentInParent<LoopManager>();
         //Transform pushable = GetChildWithTag(transform.parent, "Pushable");
 
     }
@@ -63,6 +65,8 @@ public class LoopWarp : MonoBehaviour
         
         if (!(delta.y < 0)) return;
         player.GetComponent<PlayerBehaviour>().WarpTo(loopStart.position + (Vector3)delta, this);
+        
+        _loopManager.DoPuzzleObject();
         
     }
 

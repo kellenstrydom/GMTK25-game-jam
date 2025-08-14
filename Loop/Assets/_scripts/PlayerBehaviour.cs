@@ -61,6 +61,34 @@ public class PlayerBehaviour : MonoBehaviour
         AdjustCamera();
     }
 
+    private void LateUpdate()
+    {
+        CheckSideWarp();
+    }
+
+    void CheckSideWarp()
+    {
+        Transform box = _boxPusher.box;
+        Vector3 boxDelta = Vector2.zero;
+        if (box != null)
+        {
+            boxDelta = box.position - transform.position;
+        }
+        
+        if (Mathf.Abs(transform.position.x) > xBoundaries)
+        {
+            if (transform.position.x > 0)
+                transform.position += Vector3.left * (2 * xBoundaries);
+            else
+                transform.position -= Vector3.left * (2 * xBoundaries);
+        }
+
+        if (box)
+        {
+            box.position = transform.position + boxDelta;
+        }
+    }
+
     void Move()
     {
         Vector2 movement = InputManager.MovementInputValue();
@@ -81,29 +109,29 @@ public class PlayerBehaviour : MonoBehaviour
         }
         // ----------------------------
 
-        if (Mathf.Approximately(Mathf.Abs(transform.position.x), xBoundaries))
-        {
-            if (transform.position.x > 0 && movement.x > 0)
-            {
-                movement = Vector3.Normalize(new Vector2(0, movement.y));
-            }
-            else if (transform.position.x < 0 && movement.x < 0)
-            {
-                movement = Vector3.Normalize(new Vector2(0, movement.y));
-            }
-        }
+        // if (Mathf.Approximately(Mathf.Abs(transform.position.x), xBoundaries))
+        // {
+        //     if (transform.position.x > 0 && movement.x > 0)
+        //     {
+        //         movement = Vector3.Normalize(new Vector2(0, movement.y));
+        //     }
+        //     else if (transform.position.x < 0 && movement.x < 0)
+        //     {
+        //         movement = Vector3.Normalize(new Vector2(0, movement.y));
+        //     }
+        // }
 
         _boxPusher.CheckBox(movement);
         ChangeDirection(GetDirection(movement));
         transform.Translate(movement * (moveSpeed * Time.deltaTime));
 
-        if (Mathf.Abs(transform.position.x) > xBoundaries)
-        {
-            if (transform.position.x > 0)
-                transform.position = new Vector2(xBoundaries, transform.position.y);
-            else
-                transform.position = new Vector2(-xBoundaries, transform.position.y);
-        }
+        // if (Mathf.Abs(transform.position.x) > xBoundaries)
+        // {
+        //     if (transform.position.x > 0)
+        //         transform.position = new Vector2(xBoundaries, transform.position.y);
+        //     else
+        //         transform.position = new Vector2(-xBoundaries, transform.position.y);
+        // }
     }
 
     Direction GetDirection(Vector2 input)

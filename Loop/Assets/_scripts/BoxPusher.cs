@@ -34,6 +34,8 @@ public class BoxPusher : MonoBehaviour
         player = GetComponent<PlayerBehaviour>();
     }
 
+    
+
     public void CheckBox(Vector2 moveDir)
     {
         box = null;
