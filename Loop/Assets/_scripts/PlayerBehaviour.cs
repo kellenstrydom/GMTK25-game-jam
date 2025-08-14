@@ -149,7 +149,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    void ChangeDirection(Direction newDir)
+    public void ChangeDirection(Direction newDir)
     {
         if (direction == newDir) return;
         direction = newDir;
