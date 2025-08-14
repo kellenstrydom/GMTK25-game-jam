@@ -262,6 +262,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Archer loop
       objectReference: {fileID: 0}
+    - target: {fileID: 7850311869615593061, guid: 3903dbc988880a04d861599d489f4de9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8006303729768552558, guid: 3903dbc988880a04d861599d489f4de9, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -270,6 +274,10 @@ PrefabInstance:
       propertyPath: pushable
       value: 
       objectReference: {fileID: 1536027040}
+    - target: {fileID: 8934559970826409104, guid: 3903dbc988880a04d861599d489f4de9, type: 3}
+      propertyPath: puzzleObject
+      value: 
+      objectReference: {fileID: 1536027039}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5804361830573777185, guid: 3903dbc988880a04d861599d489f4de9, type: 3}
@@ -2752,7 +2760,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.758
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3982,6 +3990,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1418940600}
     - target: {fileID: 340591824031676176, guid: 66555d30b038e0440864a19523f0f07b, type: 3}
+      propertyPath: moveSpeed
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 340591824031676176, guid: 66555d30b038e0440864a19523f0f07b, type: 3}
       propertyPath: walkingAS
       value: 
       objectReference: {fileID: 365211854}
@@ -3989,13 +4001,33 @@ PrefabInstance:
       propertyPath: walkingClip
       value: 
       objectReference: {fileID: 8300000, guid: 26b63e200a6657945bef258bca075533, type: 3}
+    - target: {fileID: 340591824031676176, guid: 66555d30b038e0440864a19523f0f07b, type: 3}
+      propertyPath: xBoundaries
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1066743916550166807, guid: 66555d30b038e0440864a19523f0f07b, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1473303095612528452, guid: 88625c7bac251bc46b857066ed55b7b5, type: 3}
     - target: {fileID: 1066743916550166807, guid: 66555d30b038e0440864a19523f0f07b, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1066743916550166807, guid: 66555d30b038e0440864a19523f0f07b, type: 3}
       propertyPath: m_SortingOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1066743916550166807, guid: 66555d30b038e0440864a19523f0f07b, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1133503309
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180090149385279093, guid: 66555d30b038e0440864a19523f0f07b, type: 3}
+      propertyPath: m_Size.y
+      value: 6.147233
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180090149385279093, guid: 66555d30b038e0440864a19523f0f07b, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.9802861
       objectReference: {fileID: 0}
     - target: {fileID: 3293873801982640517, guid: 66555d30b038e0440864a19523f0f07b, type: 3}
       propertyPath: pickUp
@@ -4019,7 +4051,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7970187305196125438, guid: 66555d30b038e0440864a19523f0f07b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 72.299995
+      value: -191.1
       objectReference: {fileID: 0}
     - target: {fileID: 7970187305196125438, guid: 66555d30b038e0440864a19523f0f07b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5377,7 +5409,7 @@ MonoBehaviour:
   isWaiting: 0
   arrow: {fileID: 8776218280691973496, guid: 0c9ab68d87322bb4c8e2e7dbc97e9a75, type: 3}
   spawnPoint: {fileID: 40766650}
-  arrowSpeed: 22
+  arrowSpeed: 31
   loopTime: 0
   shootDelay: 0.55
   arrowsAS: {fileID: 236460171}
@@ -5996,6 +6028,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Loop car
       objectReference: {fileID: 0}
+    - target: {fileID: 7850311869615593061, guid: 3903dbc988880a04d861599d489f4de9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8006303729768552558, guid: 3903dbc988880a04d861599d489f4de9, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -6004,6 +6040,10 @@ PrefabInstance:
       propertyPath: pushable
       value: 
       objectReference: {fileID: 1309958650}
+    - target: {fileID: 8934559970826409104, guid: 3903dbc988880a04d861599d489f4de9, type: 3}
+      propertyPath: puzzleObject
+      value: 
+      objectReference: {fileID: 1309958649}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -9470,7 +9510,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.5664196, y: -0.022478104}
+  m_Offset: {x: 0.030020237, y: -0.012544632}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -9480,7 +9520,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.9241295, y: 3.7422829}
+  m_Size: {x: 1.3745298, y: 1.060276}
   m_EdgeRadius: 0
 --- !u!212 &1309958652
 SpriteRenderer:
@@ -12491,6 +12531,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Loop
       objectReference: {fileID: 0}
+    - target: {fileID: 7850311869615593061, guid: 3903dbc988880a04d861599d489f4de9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8934559970826409104, guid: 3903dbc988880a04d861599d489f4de9, type: 3}
+      propertyPath: puzzleObject
+      value: 
+      objectReference: {fileID: 1747122623}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -13864,7 +13912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726883a4977dcf94b81c4b201f1282d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 3
+  detectionRadius: 5
   indecator: {fileID: 320182803}
   neededObjectName: 
   onTake:
@@ -16626,8 +16674,16 @@ PrefabInstance:
       value: -0.1568985
       objectReference: {fileID: 0}
     - target: {fileID: 5866601872567233078, guid: c9b836ef820bd104bbd1f87c7c8035b6, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866601872567233078, guid: c9b836ef820bd104bbd1f87c7c8035b6, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866601872567233078, guid: c9b836ef820bd104bbd1f87c7c8035b6, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1133503309
       objectReference: {fileID: 0}
     - target: {fileID: 6036586821138956230, guid: c9b836ef820bd104bbd1f87c7c8035b6, type: 3}
       propertyPath: m_Name

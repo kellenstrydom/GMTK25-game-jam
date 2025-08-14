@@ -103,5 +103,4 @@ MonoBehaviour:
   Arrowlength: 1
   targetTag: Target
   flightDirection: {x: -1, y: 0}
-  flightDistance: 100
-  arrow: {fileID: 8300000, guid: 8bfd7f52c7093ac4bbdb25c32d093c69, type: 3}
+  flightDistance: 150
