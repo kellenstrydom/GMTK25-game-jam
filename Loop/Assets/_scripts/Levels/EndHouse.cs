@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndHouse : MonoBehaviour
 {
@@ -106,13 +107,16 @@ public class EndHouse : MonoBehaviour
 
         if (col != null)
             col.enabled = true;
+
+        StartCoroutine(SwitchToEndDelay(4f));
     }
 
     private IEnumerator SwitchToEndDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         
-        
+        SceneManager.LoadScene("Home");
+        PlayerPrefs.SetInt("VisitedStartBefore", 1);
     }
 
 }
